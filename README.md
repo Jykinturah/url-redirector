@@ -4,7 +4,5 @@ A url shortner for my five letter domain, complete with authentication (maybe) a
 
 Practicing with:
 * express
-* express-sessions
-* passport
 * mongoose
 * mongodb
