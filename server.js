@@ -2,6 +2,7 @@
 
 require('dotenv').config();
 const express = require('express');
+const helmet = require('helmet');
 const path = require('path');
 const mongoose = require('mongoose');
 const validator = require('validator');
@@ -26,6 +27,7 @@ const shortUrl = require('./schemas/shortUrlSchema.js')(mongoose); // Grab the S
 /** Express Start **/
 
 const app = express();
+app.use(helmet());
 
 app.use(express.static(path.join(__dirname,'public')));
 
