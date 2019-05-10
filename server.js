@@ -28,6 +28,12 @@ const shortUrl = require('./schemas/shortUrlSchema.js')(mongoose); // Grab the S
 
 const app = express();
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: ["'none'"],
+    styleSrc: ["'self'"]
+  }
+}));
 
 app.use(express.static(path.join(__dirname,'public')));
 
