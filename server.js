@@ -39,14 +39,12 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/:short_id', (req, res) => {
   var shortId = req.params.short_id;
-  console.log(shortId);
   if (!validator.isAlphanumeric(shortId)) { 
-    console.log("Not Alphanumeric"); 
     res.redirect("/");
   } else {
     shortUrl.findOne({ short_id: `${shortId}` }, 
       (err, shortDoc) => {
-        if( shortDoc === null ) { console.log("Not in DB"); res.redirect("/"); } 
+        if( shortDoc === null ) res.redirect("/");
         else res.redirect(shortDoc.original_url); 
       }
     );
