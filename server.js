@@ -12,6 +12,8 @@ const dbUser = encodeURIComponent(process.env.DBUSER);
 const dbPswd = encodeURIComponent(process.env.DBPWD);
 const dbName = process.env.DB;
 
+const isProd = process.env.ENVIR === 'PROD';
+
 /** Mongoose Start **/
 
 mongoose.connect(`mongodb://${dbUser}:${dbPswd}@${dbUri}/${dbName}`,{useNewUrlParser: true})
@@ -27,13 +29,16 @@ const shortUrl = require('./schemas/shortUrlSchema.js')(mongoose); // Grab the S
 /** Express Start **/
 
 const app = express();
-app.use(helmet());
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: ["'none'"],
-    styleSrc: ["'self'"]
-  }
-}));
+
+if(isProd){
+  app.use(helmet());
+  app.use(helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'none'"],
+      styleSrc: ["'self'"]
+    }
+  }));
+}
 
 app.use(express.static(path.join(__dirname,'public')));
 
