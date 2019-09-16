@@ -34,9 +34,20 @@ if(isProd){
   app.use(helmet());
   app.use(helmet.contentSecurityPolicy({
     directives: {
+      baseUri: ["'self'"],
       defaultSrc: ["'none'"],
-      styleSrc: ["'self'"]
+      styleSrc: ["'self'"],
+      frameAncestors:["'none'"],
+      formAction: ["'none'"]
     }
+  }));
+  app.use(helmet.referrerPolicy({
+    policy: ['no-referrer']
+  }));
+  app.use(helmet.hsts({
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
   }));
 }
 
