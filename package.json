@@ -1,21 +1,21 @@
 {
-  "name": "jykme",
+  "name": "url-redirector",
   "version": "0.0.1",
-  "description": "jyk.me URL shortener",
+  "description": "URL redirector",
   "main": "server.js",
   "scripts": {
-    "start": "pm2 start server.js --name \"jykme\"",
-    "stop": "pm2 stop jykme",
-    "restart": "pm2 restart jykme"
+    "start": "pm2 start server.js --name \"url-redirector\"",
+    "stop": "pm2 stop url-redirector",
+    "restart": "pm2 restart url-redirector"
   },
   "author": "Jykinturah Sparkle",
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.19.0",
     "dotenv": "^7.0.0",
-    "express": "^4.16.4",
-    "helmet": "^3.18.0",
-    "mongoose": "^5.5.6",
+    "express": "^4.17.1",
+    "helmet": "^3.20.0",
+    "mongoose": "^5.6.11",
     "path": "^0.12.7",
     "validator": "^10.11.0"
   }

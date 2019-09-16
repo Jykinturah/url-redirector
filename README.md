@@ -1,6 +1,6 @@
-# jyk.me
+# URL Redirector
 
-A url shortner for my five letter domain, complete with authentication (maybe) and scope creep (most definitely).
+Lightweight URL redirector for my personal use.
 
 Practicing with:
 * express
