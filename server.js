@@ -7,16 +7,16 @@ const path = require('path');
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const dbUri = encodeURIComponent(process.env.DBURI);
-const dbUser = encodeURIComponent(process.env.DBUSER);
-const dbPswd = encodeURIComponent(process.env.DBPWD);
-const dbName = process.env.DB;
+const DB_URI = encodeURIComponent(process.env.DBURI);
+const DB_USR = encodeURIComponent(process.env.DBUSER);
+const DB_PWD = encodeURIComponent(process.env.DBPWD);
+const DB_NME = process.env.DB;
 
-const isProd = process.env.ENVIR === 'PROD';
+const IS_PROD = process.env.ENVIR === 'PROD';
 
 /** Mongoose Start **/
 
-mongoose.connect(`mongodb://${dbUser}:${dbPswd}@${dbUri}/${dbName}`,{useNewUrlParser: true})
+mongoose.connect(`mongodb://${DB_USR}:${DB_PWD}@${DB_URI}/${DB_NME}`,{useNewUrlParser: true})
   .then(() => {
     console.log('Database connection successful!');
   })
@@ -30,7 +30,8 @@ const shortUrl = require('./schemas/shortUrlSchema.js')(mongoose); // Grab the S
 
 const app = express();
 
-if(isProd){
+if(IS_PROD){
+  console.log('PROD DETECTED, IMPLEMENTING CSP.');
   app.use(helmet());
   app.use(helmet.contentSecurityPolicy({
     directives: {
@@ -49,7 +50,7 @@ if(isProd){
     includeSubDomains: true,
     preload: true
   }));
-}
+} else console.log('DEV DETECTED, SKIPPING CSP.');
 
 app.use(express.static(path.join(__dirname,'public')));
 
